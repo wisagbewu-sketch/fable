@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { getStory, stories } from "@/data/stories";
 import { StoryCard } from "@/components/site/StoryCard";
-import logo from "@/assets/fable-logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/story/$slug")({
   loader: ({ params }) => {
@@ -96,7 +96,7 @@ function StoryReader() {
           <Link to="/library" className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold hover:opacity-80 transition ${subtle}`}>
             <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Library</span>
           </Link>
-          <Link to="/" className="flex items-center gap-2"><img src={logo.url} alt="Fable" className="h-7" /></Link>
+          <Link to="/" className="flex items-center gap-2"><img src={logo} alt="Fable" className="h-7" /></Link>
           <div className="flex items-center gap-1">
             <IconBtn dark={dark} onClick={() => setFontScale(s => Math.max(0.85, +(s - 0.1).toFixed(2)))} label="Smaller text"><Minus className="h-4 w-4" /></IconBtn>
             <span className={`px-2 text-xs font-bold tabular-nums ${subtle}`}>{Math.round(fontScale * 100)}%</span>
