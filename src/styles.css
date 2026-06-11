@@ -1,0 +1,123 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ====== Fonts loaded via <link> in src/routes/__root.tsx ====== */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 14px);
+  --radius-3xl: calc(var(--radius) + 20px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand tokens */
+  --color-cream: var(--cream);
+  --color-peach: var(--peach);
+  --color-mint: var(--mint);
+  --color-gold: var(--gold);
+  --color-coral: var(--coral);
+  --color-teal: var(--teal);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-success: var(--success);
+
+  --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --font-sans: "Nunito", "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1.25rem; /* 20px */
+
+  /* Brand palette */
+  --cream: oklch(0.92 0.055 86);     /* #F3E1B0 */
+  --peach: oklch(0.84 0.058 47);     /* #E8C1A3 */
+  --mint:  oklch(0.85 0.038 175);    /* #B7D5CE */
+  --gold:  oklch(0.83 0.135 86);     /* #F3C75F */
+  --coral: oklch(0.71 0.165 32);     /* #F07A5A */
+  --teal:  oklch(0.78 0.055 187);    /* #86C1BE */
+  --ink: oklch(0.27 0 0);            /* #2D2D2D */
+  --ink-muted: oklch(0.52 0 0);      /* #6E6E6E */
+  --success: oklch(0.74 0.13 145);   /* #6FBF73 */
+
+  --background: oklch(0.975 0.008 85); /* #FAF8F4 */
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--coral);
+  --primary-foreground: oklch(0.99 0.005 85);
+  --secondary: var(--mint);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.95 0.012 85);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.62 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.02 85);
+  --input: oklch(0.92 0.02 85);
+  --ring: var(--coral);
+
+  /* Shadows — soft layered */
+  --shadow-soft: 0 1px 2px rgba(45,45,45,0.04), 0 8px 24px -8px rgba(45,45,45,0.08);
+  --shadow-float: 0 4px 10px -4px rgba(45,45,45,0.08), 0 20px 40px -20px rgba(45,45,45,0.18);
+  --shadow-glow: 0 0 0 6px color-mix(in oklab, var(--gold) 25%, transparent);
+
+  /* Gradients */
+  --gradient-hero: radial-gradient(ellipse at 20% 10%, color-mix(in oklab, var(--mint) 55%, transparent) 0%, transparent 55%),
+                   radial-gradient(ellipse at 85% 20%, color-mix(in oklab, var(--cream) 70%, transparent) 0%, transparent 60%),
+                   radial-gradient(ellipse at 50% 100%, color-mix(in oklab, var(--peach) 55%, transparent) 0%, transparent 60%);
+  --gradient-coral: linear-gradient(135deg, var(--coral), color-mix(in oklab, var(--gold) 60%, var(--coral)));
+  --gradient-mint: linear-gradient(135deg, color-mix(in oklab, var(--teal) 70%, white), var(--mint));
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { background-color: var(--color-background); color: var(--color-foreground); }
+  body { font-family: var(--font-sans); font-weight: 500; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; color: var(--color-foreground); }
+  ::selection { background: color-mix(in oklab, var(--gold) 60%, transparent); color: var(--ink); }
+}
+
+@utility shadow-soft   { box-shadow: var(--shadow-soft); }
+@utility shadow-float  { box-shadow: var(--shadow-float); }
+@utility bg-hero-radial { background-image: var(--gradient-hero); }
+@utility bg-coral-grad  { background-image: var(--gradient-coral); }
+@utility bg-mint-grad   { background-image: var(--gradient-mint); }
+
+@utility story-card {
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  &:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-float); }
+}
+
+@keyframes float-y { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+@keyframes drift   { 0%,100% { transform: translate(0,0) } 50% { transform: translate(8px,-12px) } }
+@keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+
+@utility animate-float { animation: float-y 6s ease-in-out infinite; }
+@utility animate-drift { animation: drift 9s ease-in-out infinite; }
